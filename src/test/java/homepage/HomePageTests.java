@@ -79,7 +79,7 @@ public class HomePageTests extends BaseTests {
 	}
 	ModalProdutoPage modalProdutoPage;
 	@Test
-	public void incluirProdutoNoCarrinho() {
+	public void testIncluirProdutoNoCarrinho() {
 		String tamanhoProduto = "M";
 		String corProduto = "Black";
 		int qntProduto = 2 ;
@@ -167,10 +167,10 @@ public class HomePageTests extends BaseTests {
 
 	CarrinhoPage carrinhoPage;
 	@Test
-	public void irParaCarrinho() {
+	public void testIrParaCarrinho() {
 		//Pré-codição
 		//Produto deve está na pagina modal
-		incluirProdutoNoCarrinho();
+		testIncluirProdutoNoCarrinho();
 		
 		carrinhoPage = modalProdutoPage.clicarBotaoProceedToCheckout();
 		
@@ -211,11 +211,11 @@ public class HomePageTests extends BaseTests {
 	CheckoutPage checkoutPage;
 	String esp_nomeCliente = "Lucas Dias";
 	@Test
-	public void irParaChekout() {
+	public void testIrParaChekout() {
 		//Pre-condição
 		
 		//Produto disponivel
-		irParaCarrinho();
+		testIrParaCarrinho();
 		
 		//clincar botao
 		checkoutPage = carrinhoPage.clicarBotaoProceed();
@@ -257,10 +257,10 @@ public class HomePageTests extends BaseTests {
 	}
 	
 	@Test
-	public void finalizarPedido() {
+	public void testFinalizarPedido() {
 		//Pré condição
 		//Checkout completamente concluido
-		irParaChekout();
+		testIrParaChekout();
 		
 		//Teste
 		//Clicar no botão para confirmar
