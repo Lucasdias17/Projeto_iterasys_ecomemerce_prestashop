@@ -103,6 +103,8 @@ public class HomePageTests extends BaseTests {
 		assertThat(loginPage.logadoComSucesso(nomeUsuario), is(esperando_loginOk));
 		//volta pagina inicial
 		
+		capturarTela(nomeTeste, resultado);
+		
 		if(esperando_loginOk)
 			homePage.clicarBotaoSignOut();
 			
