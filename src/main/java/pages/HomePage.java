@@ -25,6 +25,8 @@ public class HomePage {
 	//conferir acesso com sucesso
 	private By usuarioLogado = By.cssSelector("#_desktop_user_info span.hidden-sm-down");
 	
+	private By botaoSignOut = By.cssSelector("a.logout");
+	
 	public HomePage(WebDriver driver) {
 		this.driver = driver;   
 	}
@@ -74,6 +76,9 @@ public class HomePage {
 	  	String l = driver.findElement(usuarioLogado).getText();
 	  	System.out.println(l);
 	 	
+	}
+	public void clicarBotaoSignOut() {
+		driver.findElement(botaoSignOut).click();
 	}
 	
  

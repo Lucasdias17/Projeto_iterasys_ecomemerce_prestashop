@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import base.BaseTests;
 import pages.CarrinhoPage;
@@ -75,8 +77,39 @@ public class HomePageTests extends BaseTests {
 		assertThat(loginPage.logadoComSucesso("Lucas Dias"), is(true));
 		//volta pagina inicial
 		carregarPaginaInicial();
-	
 	}
+	
+	@ParameterizedTest
+	@CsvFileSource(resources = "/massaTeste_Login.csv", numLinesToSkip = 1, delimiter = ';')
+	public void testLogin_UsuarioLogadoComDadosValidos(String nomeTeste, String email, String password,String nomeUsuario, String resultado) {
+		//clicar o botao sign in na home page
+		loginPage = homePage.clickBotaoSignIn();
+		
+		//Preencher usuario e senha
+		loginPage.preencherEmail(email);
+		loginPage.preencherPassWord(password);
+		
+		//Clicar o botao de Sign In
+		loginPage.clickBotaoSignIn();
+		
+		boolean esperando_loginOk;
+		if (resultado.equals("positivo"))
+			esperando_loginOk = true;
+		else
+			esperando_loginOk = false;
+		
+		//Validar se o usuario está logado
+	 	//loginPage.logadoComSucesso2();
+		assertThat(loginPage.logadoComSucesso(nomeUsuario), is(esperando_loginOk));
+		//volta pagina inicial
+		
+		if(esperando_loginOk)
+			homePage.clicarBotaoSignOut();
+			
+		carregarPaginaInicial();
+	}
+	
+	
 	ModalProdutoPage modalProdutoPage;
 	@Test
 	public void testIncluirProdutoNoCarrinho() {

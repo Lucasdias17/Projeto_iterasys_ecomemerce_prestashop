@@ -1,0 +1,3 @@
+nomeTeste;email;password;nomeUsuario;resultado
+loginValido;lucas216@teste.com;123456;Lucas Dias;positivo
+loginInvalido;lucas216@teste.com;lucas123;Marcelo;negativo
