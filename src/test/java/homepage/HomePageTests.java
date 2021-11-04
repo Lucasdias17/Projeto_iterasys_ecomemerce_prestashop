@@ -13,6 +13,7 @@ import pages.CarrinhoPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ModalProdutoPage;
+import pages.PedidoPage;
 import pages.ProdutoPage;
 import util.Funcoes;
 
@@ -253,5 +254,29 @@ public class HomePageTests extends BaseTests {
 		
 		checkoutPage.selecionarCheckBoxIGree();
 		assertTrue(checkoutPage.confirmarSelecaoCheckBoxIGree());
+	}
+	
+	@Test
+	public void finalizarPedido() {
+		//Pré condição
+		//Checkout completamente concluido
+		irParaChekout();
+		
+		//Teste
+		//Clicar no botão para confirmar
+		PedidoPage pedidoPage = checkoutPage.clicarBotaConfirmar();
+		//Validar valores da tela
+		//assertThat(pedidoPage.obter_textoPedidoConfirmado().toUpperCase(), is("YOUR ORDER IS CONFIRMED")); Resultado trás o icons, então e melhor utilizar o assrtTrue
+		//endsWith, ele pega somento o final do texto
+		assertTrue(pedidoPage.obter_textoPedidoConfirmado().endsWith("YOUR ORDER IS CONFIRMED"));
+		
+		assertThat(pedidoPage.obter_textoEmail(), is("lucas216@teste.com"));
+		
+		assertThat(pedidoPage.obter_valorTotal(), is(esp_subTotalTotal));
+		
+		assertThat(pedidoPage.obter_valorTotalInclus(), is(esp_totoalTexIncTotal));
+		
+		assertThat(pedidoPage.obter_tipoPagamento(), is("check"));
+		
 	}
 }
